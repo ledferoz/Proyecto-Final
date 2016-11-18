@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>ISQM</title>
+        <link rel="stylesheet" href="../resource/css/bootstrap.min.css"></link>
+
+    </h:head>
+    <h:body>
+        <div class="container">
+            
+                <div class="row">
+                    <!-- form: -->
+                    
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="page-header">
+                                <h2 >Registrarse</h2>
+                            </div>  
+                            <div class="container">      
+                                <c:if test="#{controladorUsuario.estado == 1}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡Registro Exitoso!</strong> 
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="#{controladorUsuario.estado == 2}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡No se ah registrado correptamente!</strong> 
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="#{controladorUsuario.estado == 3}">
+                                     <div class="col-md-8">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Modificacion realizada con exito</strong> 
+                                        </div>
+                                    </div>
+                                </c:if>
+                                <c:if test="#{controladorUsuario.estado == 4}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡No se pudo modificar el usuario!</strong> 
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+                            <h:form id="defaultForm" pi:method="post" class="form-horizontal"  >
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Tipo de Documento</h:outputLabel>
+                                    <div class="col-lg-5">
+
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control col-xs-8"
+                                                         value="#{controladorUsuario.user.idTipoDocumento}">
+                                            <f:selectItems value="#{controladorTipoDocumento.all}" var="tipo" itemLabel="#{tipo.nombreDocumento}" ></f:selectItems>
+
+                                        </h:selectOneMenu>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Numero de Documento</h:outputLabel>
+                                    <div class="col-lg-5">
+                                        <h:inputText  class="form-control" id="phoneNumber" style="border-radius:5px;" value="#{controladorUsuario.user.documento}" />
+                                    </div>
+                                </div>  
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Nombres:</h:outputLabel>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="firstName" pi:placeholder="Primer Noaceholdembre" style="border-radius:5px;" value="#{controladorUsuario.user.nombre1}"/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h:inputText  required="required" class="form-control" pi:placeholder="Segundo Nombre" style="border-radius:5px;" value="#{controladorUsuario.user.nombre2}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Apellidos:</h:outputLabel>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="lastName" pi:placeholder="Primer Apellido" style="border-radius:5px;" value="#{controladorUsuario.user.apellido1}"/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="secondsurName" pi:placeholder="Segundo Apellido" style="border-radius:5px;" value="#{controladorUsuario.user.apellido2}"/>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Correo Electronico:</h:outputLabel>
+                                    <div class="col-lg-5">
+                                        <h:inputText  class="form-control" id="email" style="border-radius:5px;" pi:placeholder="ejempo@mail.com" value="#{controladorUsuario.user.correo}"/>
+                                    </div>
+                                </div>
+
+
+                                <fieldset>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-lg-3 control-label">Ingrese su contraseña</h:outputLabel>
+                                        <div class="col-lg-5">
+                                            <h:inputSecret  class="form-control" id="password" style="border-radius:5px;" value="#{controladorUsuario.user.contrasena}"/>
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <h:commandButton type="submit" class="btn btn-primary" style="background-color: #50B2A8;" value="Registro" action="#{controladorUsuario.registar()}" ></h:commandButton>
+                                    </div>
+                                </div>  
+
+                            </h:form>
+
+                        </div>       
+                   
+                    <!-- :form -->
+                    <h:form>
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Documento</td>
+                            <td>Primer Nombre</td>
+                            <td>Segundo Nombre</td>
+                            <td>Primer Apellido</td>
+                            <td>Segundo Apellido</td>
+                            <td>Contrasena</td>
+                            <td>Correo</td>
+                            <td>Editar o eliminar</td>
+
+                        </tr>
+                        <c:forEach items="#{controladorUsuario.all}" var="v">
+                            <tr>
+                                <td>#{v.documento}</td>
+                                <td>#{v.nombre1}</td>
+                                <td>#{v.nombre2}</td>
+                                <td>#{v.apellido1}</td>
+                                <td>#{v.apellido2}</td>
+                                <td>#{v.contrasena}</td>
+                                <td>#{v.correo}</td>
+                                <td>
+
+                                    <h:commandLink onclick="modalEliminar()">
+                                        <h:graphicImage value="../img/delete.png"  height="32px" width="32px" />
+                                        
+                                        <f:ajax render="fomVentanas:misValoresEliminar"
+                                                listener="#{controladorUsuario.setUser(v)}">
+                                        </f:ajax>
+                                    </h:commandLink> 
+                                    <h:commandLink onclick="modalEditar()">
+                                        <h:graphicImage value="../img/edit.png"   height="32px" width="32px" />
+                                        <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+                                        
+                                        <f:ajax render="fomVentanas:editar defaultForm"
+                                                listener="#{controladorUsuario.setUser(v)}">
+                                        </f:ajax>
+                                    </h:commandLink></td>
+                            </tr>
+                        </c:forEach>
+
+                      
+                    </table>
+                        
+                      
+                        <!-- /.modal -->
+                    
+                         </h:form> 
+                </div>
+           
+        </div>
+        <h:form id="fomVentanas">
+            <div class="modal fade" tabindex="-1" role="dialog"
+                             id="myModalEliminar">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title">Desea Eliminar El usuario?</h4>
+                                    </div>
+
+                                    <h:panelGroup id="misValoresEliminar" class="modal-body">
+                                       Nombre:#{controladorUsuario.user.nombre1} <br />
+                                       Documento:#{controladorUsuario.user.documento}  <br />
+                                       Correo:#{controladorUsuario.user.correo}
+                                    </h:panelGroup>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Salir</button>
+                                        <h:commandButton class="btn btn-primary"
+                                                         action="#{controladorUsuario.eliminar()}"
+                                                         value="Eliminar">
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+         <div class="modal fade" id="modalEditar" tabindex="-1"
+                        role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Modificar Usuario</h4>
+                                </div>
+                                <h:panelGroup id="editar" styleClass="modal-mody">
+                                    <label> Documento</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.documento}">
+                                    </h:inputText>
+                                    <label>Primer Nombre</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.nombre1}"></h:inputText>
+                                    <label>Segundo Nombre</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.nombre2}">
+                                    </h:inputText>
+                                    <label>Primer Apellido</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.apellido1}">
+                                    </h:inputText>
+                                    <label>Segundo Apellido</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.apellido2}">
+                                    </h:inputText>
+                                    <label>Correo</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.correo}">
+                                    </h:inputText>
+                                    <label>Contrasena</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorUsuario.user.contrasena}">
+                                    </h:inputText>
+                                </h:panelGroup>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">Salir</button>
+                                    <h:commandButton class="btn btn-primary"
+                                                     action="#{controladorUsuario.modificar()}" value="Guardar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <h:commandButton value="Cerra Sesion" id="btnLogout" action="#{cerrarSessionControler.logout()}"></h:commandButton>
+            </h:form>
+        <!-- javascript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+       <script>
+		function modalEliminar() {
+			$('#myModalEliminar').modal('show');
+		}
+		function modalEditar() {
+			$('#modalEditar').modal('show');
+		}
+	</script>
+        <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="../resource/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
+

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <h:body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="TITLE">
+                TITLE
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container">
+                    <div class="col-md-8">
+                        <c:if test="#{controladorFeedbacks.estado == 1}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡Registro Exitoso!</strong> El registro se realizo correptamente.
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-8">
+                                <c:if test="#{controladorFeedbacks.estado == 2}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡Registro Fallido!</strong> No se realizo el registro.
+                                        </div>
+                                    </div>
+                                </c:if>
+                                
+                            </div>
+                    #{controladorFeedbacks.borrarEstado()}
+                    <div class="row">
+                        <h:form id="form_nuevo_feedbacks"  class="form-horizontal" >
+                            <div class="form-group">
+
+                                <label class="col-sm-3 control-label" for="mds">Id monitoreo</label>
+                                <div class="col-lg-5 validacion">
+                                    <h:selectOneMenu  class="form-control col-xs-4"
+                                                      value="#{controladorFeedbacks.feedbacks.idMonitoreos}" >
+                                        <f:selectItems value="#{controladorMonitoreo.all}" var="m" itemLabel="#{m.idMonitoreos}"  ></f:selectItems>
+
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="fecha">Fecha Feedback:</label>
+                                <div class="col-sm-5 validacion">
+                                    <input type="text" class="form-control" id="fecha" name="fecha"  placeholder="2016-08-16" jsf:value="#{controladorFeedbacks.feedbacks.fechaFeedback}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="recomendaciones">Recomendaciones:</label>
+                                <div class="col-sm-5 validacions"> 
+                                    <textarea class="form-control" id="recomendaciones" type="text" jsf:value="#{controladorFeedbacks.feedbacks.recomendacion}"></textarea> 
+                                </div>
+                            </div>
+
+                            <div class="form-group1">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <h:commandButton type="submit" class="btn btn-primary" value="Agendar Feedback" action="#{controladorFeedbacks.registrar()}"></h:commandButton>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+        <script>
+            $(document).ready(function () {
+                       $('#form_nuevo_feedbacks').formValidation({
+                    message: 'This value is not valid',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        form_nuevo_feedbacks:fecha: {
+                            row: '.validacion',
+                            validators: {
+                                notEmpty: {
+                                    message: 'Nombre requerido'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z\s]+$/,
+                                    message: 'Caracteres no permitidos'
+                                }
+
+                            }
+                        },
+                       form_nuevo_feedbacks:recomendacion: {
+                            row: '.validacion',
+                            validators: {
+                                notEmpty: {
+                                    message: 'The last name is required'
+                                },
+                                digits: {
+                                    message: 'solo numeros'
+                                }
+                            }
+                        }
+            }
+            });
+            });
+        </script>
+
+    </h:body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+                title
+            </ui:define>
+
+            <ui:define name="content">
+               <div class="fileUpload btn btn-primary">
+    	<span>Generar reporte Excel</span>
+    		<input type="file" class="upload" />
+	</div>
+
+	<div class="alert alert-info alert-dismissible visible-xs" role="alert">
+  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  		<strong>En dispositivos móbiles:</strong> Utilice <span class="glyphicon glyphicon-list-alt"></span> para alternar la visualización.
+	</div>
+	
+
+	
+	<table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+			<thead>
+			<tr>
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Monitoreo">Numero de Monitoreo</th>
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Fecha">Fecha Monitoreo </th>
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Asesor">Asesor</th>
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Analista">Analista de Calidad</th>  
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Calificación">Calificación</th>      
+				<th data-halign="center" data-align="center" data-sortable="true" data-field="Atributo">Atributo Afectado</th>                                          
+                        </tr>
+		</thead>   
+
+		<tbody>
+                    <c:forEach items="#{controladorMonitoreo.all}" var="m"> 
+			<tr>
+                            <td>#{m.idMonitoreos}</td>
+                            <td>#{m.fechaMonitoreo}</td>
+                            <td>#{m.idAsesor.nombre1}  </td>
+                            <td>#{m.idAnalistaDeCalidad.nombre1}</td>
+                            <td><span class="label label-success">#{m.calificacionMonitoreo}</span></td>
+                            <td>#{m.transcripcion}</td>
+                            
+			</tr>
+
+                    </c:forEach>
+		</tbody>
+	</table>
+                        
+                    </div>
+                </div>
+            </section>
+           
+      
+        
+            </ui:define>
+
+        </ui:composition>
+        <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="input" claechass="control-label col-xs-2">Nombre Categoria</label>
+                        <h:inputText  class="form-control" pi:placeholder="2016-03-12" value="#{controladorCategoria.categoria.nombreCategoria}"/>
+                        </div>
+                    </div>
+ <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="../resources/js/bootstrap.min.js"></script>
+    </body>
+</html>

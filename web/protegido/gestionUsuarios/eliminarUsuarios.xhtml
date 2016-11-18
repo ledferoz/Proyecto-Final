@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+                Eliminar Usuario 
+            </ui:define>
+            <div class="container">
+                <div class="row">    
+                    <ui:define name="content">
+                        <div class="col-md-8">
+                            <c:if test="#{controladorUsuario.estado == 5}" >
+                                <div class="col-md-8">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>¡Usuario Eliminado !</strong> Se realizo correptamente la eliminacion del usuario.
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="#{controladorUsuario.estado == 6}" >
+                                <div class="col-md-8">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>¡Error!</strong> No se pudo eliminar el Usuario  .
+                                    </div>
+                                </div>
+                            </c:if>
+                            #{controladorUsuario.borrarEstado()}
+                            </div>
+                        <h:form>
+                            <br/>
+                            <h:commandButton  id="exportar" image="../../resources/imgs/descargar.png">
+
+                            </h:commandButton>
+                            <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+                                <thead>
+                                    <tr>
+                                        <th data-halign="center" data-align="center">Documento</th>
+                                        <th  data-halign="center" data-align="center">Primer Nombre</th>
+                                        <th  data-halign="center" data-align="center">Segundo Nombre</th>
+                                        <th  data-halign="center" data-align="center">Primer Apellido</th>
+                                        <th  data-halign="center" data-align="center">Segundo Apellido</th>
+                                        <th  data-halign="center" data-align="center">Contrasena</th>
+                                        <th  data-halign="center" data-align="center">Correo</th>
+                                        <th  data-halign="center" data-align="center">Eliminar</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="#{controladorUsuario.all}" var="v">
+                                        <tr>
+                                            <td>#{v.documento}</td>
+                                            <td>#{v.nombre1}</td>
+                                            <td>#{v.nombre2}</td>
+                                            <td>#{v.apellido1}</td>
+                                            <td>#{v.apellido2}</td>
+                                            <td>#{v.contrasena}</td>
+                                            <td>#{v.correo}</td>
+                                            <td>
+
+                                                <h:commandLink onclick="modalEliminar()">
+                                                    <h:graphicImage value="../../resources/imgs/eliminar.png"  height="32px" width="32px" />
+
+                                                    <f:ajax render="fomVentanas:misValoresEliminar"
+                                                            listener="#{controladorUsuario.setUser(v)}">
+                                                    </f:ajax>
+                                                </h:commandLink> 
+                                                
+
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+
+                            </table>
+
+
+                            <!-- /.modal -->
+
+                        </h:form> 
+
+                        <h:form id="fomVentanas">
+                            <div class="modal fade" tabindex="-1" role="dialog"
+                                 id="myModalEliminar">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title">Desea Eliminar El usuario?</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <h:panelGroup id="misValoresEliminar" class="modal-body">
+                                            Nombre:#{controladorUsuario.user.nombre1} <br />
+                                            Documento:#{controladorUsuario.user.documento}  <br />
+                                            Correo:#{controladorUsuario.user.correo}
+                                        </h:panelGroup>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Salir</button>
+                                            <h:commandButton class="btn btn-primary"
+                                                             action="#{controladorUsuario.eliminar()}"
+                                                             value="Eliminar">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                           
+                        </h:form>
+
+                    </ui:define>
+                </div>
+
+            </div>
+        </ui:composition>
+
+    </body>
+</html>

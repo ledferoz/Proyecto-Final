@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/> <!-- meta:vp+tab-->
+        <title>AnalistaDeCalidad</title>
+        <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/estiloSistema.css"/>
+        <link rel="stylesheet" href="../resources/css/bootstrap-table.min.css"/>
+
+        <script src="../resources/js/jquery-1.12.1.min.js"></script>
+        <script src="../resources/js/bootstrap.min.js"></script>
+        <script src="../resources/js/bootstrap-table.min.js"></script>
+        <script src="../resources/js/bootstrap-table-es-ES.min.js"></script>
+    </h:head>
+    <h:body>
+        <style>
+            header{
+                width: auto;
+                color: white;
+                min-height: 100px;
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");  
+                background-color: #0084FD;
+            }
+            body{
+                background-image: url("../resources/imgs/SistemaWeb.jpg");
+                color:gray;
+            }
+            .fileUpload {
+                position: relative;
+                overflow: hidden;
+                margin: 10px;
+            }
+            .fileUpload input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+            .table-striped{
+                background-color: white;
+            }
+            .btn-primary span{
+                color: white;
+            }       
+        </style>
+        <div class="container"> 
+            <header> <img src="../resources/imgs/LogoHorizontalBlanco2.png" height="100" width="400"/> Analista De Calidad </header>
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="protegido/registro.xhtml">Registro Usuario</a></li>
+                            <li><a href="protegido/CentroCalificaciones.xhtml">Centro Calificaciones</a></li>
+                            <li class="nav"><a href="protegido/feedback.xhtml">Nuevo Feedback</a></li>
+                            <li class="nav"><a href="NuevoMonitoreo.html">Nuevo Monitoreo</a></li>
+                            <li class="nav"><a href="protegido/CalificacionMonitoreo.xhtml">Calificación Monitoreo</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /.navbar-collapse -->
+                <!-- /.container-fluid -->
+            </nav>
+            <section>
+                <div class="row"> <!-- esto me genera un espacio-->
+                    <div class="col-md-12 caja">
+                        <img src="./../resources/imgs/LogoHorizontalGris.png" width="100%"/>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div> 
+                    <ul>
+                        <li>Copyright © 2015 ISQM LLC. Todos los derechos reservados. El nombre y el logo de ISQM son marcas registradas.</li>
+                    </ul>
+                </div>
+            </footer>
+        </div> 
+   </h:body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+               Gestion Categorias
+            </ui:define>
+            <div class="container">
+                <div class="row">
+            <ui:define name="content">
+                 <div class="col-md-8">
+                          <c:if test="#{controladorCategoria.estado == 5}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡Registro Exitoso!</strong> El registro se realizo correptamente.
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="col-md-8">
+                                <c:if test="#{controladorCategoria.estado == 6}" >
+                                    <div class="col-md-8">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>¡Registro Fallido!</strong> No se realizo el registro.
+                                        </div>
+                                    </div>
+                                </c:if>
+                                
+                            </div>
+                    #{controladorCategoria.borrarEstado()}
+               <h:form>
+                     <h:commandButton  id="exportar" image="../../resources/imgs/descargar.png">
+
+                            </h:commandButton>
+                    <h:form id="exportForm">
+                  <h4>Reportes</h4>
+                        <h:commandButton value="Exportar Pdf" action="#{controladorReporteCategoria.exportarPDF()}" />
+                        <h:commandButton value="Exportar Excel" action="#{controladorReporteCategoria.exportarXLS()}" />
+                    </h:form>
+                <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+                        <thead>
+                                <tr>
+                                        <th data-halign="center" data-align="center" >Nombre Categoria</th>
+                                        <th data-halign="center" data-align="center" >Valor Categoria</th>                                          
+                                        <th data-halign="center" data-align="center" >Edital</th>                                          
+                                </tr>
+                        </thead> 
+
+                        <tbody>
+                            <c:forEach items="#{controladorCategoria.all}" var="c">
+
+                                <tr>
+                                    <td>#{c.nombreCategoria}</td>	
+                                    <td>#{c.valorCategoria}</td>	
+                                    <td>
+                                    <h:commandLink onclick="modalEditar()">
+                                        <h:graphicImage value="../../resources/imgs/editfee.png"   height="32px" width="32px" />
+                                        <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+
+                                        <f:ajax render="fomVentanas:editar "
+                                                listener="#{controladorCategoria.setCategoria(c)}">
+                                        </f:ajax>
+                                    </h:commandLink></td>	
+
+                                </tr>
+
+                            </c:forEach>
+                        </tbody>
+                </table>
+                    </h:form>
+
+                <h:form id="fomVentanas">
+            
+         <div class="modal fade" id="modalEditar" tabindex="-1"
+                        role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Modificar Plantilla</h4>
+                                </div>
+                                <div class="col-md-12">
+                                <h:panelGroup id="editar" styleClass="modal-mody">
+                                    <label>Nombre Categoria</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorCategoria.categoria.nombreCategoria}">
+                                    </h:inputText>
+                                    <label>Valor Categoria</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorCategoria.categoria.valorCategoria}"></h:inputText>
+                                    <label>Valor</label>
+
+
+
+                                </h:panelGroup>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">Salir</button>
+                                    <h:commandButton class="btn btn-primary"
+                                                     action="#{controladorCategoria.modificar()}" value="Guardar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </h:form>
+            </ui:define>
+      </div>          
+        </div> 
+        </ui:composition>
+
+    </body>
+</html>

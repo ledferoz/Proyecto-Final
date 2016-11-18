@@ -1,0 +1,651 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <title>Calificación Monitoreo</title>
+        <link href="../resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/formValidation.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/estiloSistema.css"/>
+        <link href="../resources/css/sweetalert.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/js/jquery-1.12.1.min.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../resources/js/formValidation.min.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrap.js" type="text/javascript"></script>
+        <script src="../resources/js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="../resources/js/es_ES.js" type="text/javascript"></script>
+
+        <link href="../resources/css/glDatePicker.default.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/js/glDatePicker.min.js" type="text/javascript"></script>
+
+        <style>
+            header{
+                width: auto;
+                color: white;
+                min-height: 100px;
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");  
+                background-color: #0084FD;
+            }
+
+            body{
+                background-image: url("../resources/imgs/SistemaWeb.jpg");
+                color:gray;
+            }
+
+            .btn-primary span{
+                color: white;
+            }
+
+            footer{
+                width: 90%;
+                margin: auto;
+                border-top: 5px double #3669a3;
+                padding: 10px;
+                margin-top: 100px;
+                text-align: center;
+                color:white;
+            }
+
+            footer ul{
+                list-style:none;
+                color:gray;
+
+            }
+
+            .form-group button{
+                color: #1369A7;
+            }
+
+            .col-md-12{
+                border: 1px solid black;
+                background-color: white;
+                color:gray;
+                list-style: none;
+                padding-top: 20px;
+            }
+
+            .col-md-12-tabla {
+                border: 1px solid black;
+                padding-top: 20px;
+                background-color: #1369A7;
+                color: white;
+                text-align: center;
+                list-style: none;
+            }
+            .col-md-5 p{
+                text-align: justify;
+            }
+            .col-sm-offset-3 {
+                margin-left: 25%;
+                margin-top: 10px;
+            }
+
+            .form-group1 {
+                margin-left: 80%;
+
+            }  
+
+        </style>
+
+    </h:head>
+    <h:body>
+
+        <div class="container">
+            <header> <img src="../resources/imgs/LogoHorizontalBlanco2.png" height="100" width="400"/> Calificación Monitoreo </header>
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="SistemaInicio.html">Sistema</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <h2>Calificación Monitoreo</h2>
+                    </div>
+
+
+                    <h:form>
+                        <div class="row">
+                            <div class="form-group">
+                                <h:outputLabel class="col-lg-1 control-label">Tipo de Monitoreo</h:outputLabel>
+                                <div class="col-lg-3">
+
+                                    <h:selectOneMenu id="tipoMonitoreo" class="form-control col-xs-8"
+                                                     value="#{controladorMonitoreo.monitoreo.idTipoMonitoreo}">
+                                        <f:selectItems value="#{controladorTipoMonitoreo.all}" var="tipo" itemLabel="#{tipo.nombreMonitoreo}" ></f:selectItems>
+
+                                    </h:selectOneMenu>
+
+                                </div>
+                              
+                                 <h:outputLabel class="col-lg-1 control-label">Analista</h:outputLabel>
+                                <div class="col-lg-3">
+
+                                    <h:selectOneMenu id="tidAnalista" class="form-control col-xs-8"
+                                                     value="#{controladorMonitoreo.monitoreo.idAnalistaDeCalidad}">
+                                        <f:selectItems value="#{controladorUsuario.all}" var="tipo" itemLabel="#{tipo.nombre1}" ></f:selectItems>
+
+                                    </h:selectOneMenu>
+
+                              
+                                 </div>
+                                <h:outputLabel class="col-lg-1 control-label">Asesor</h:outputLabel>
+                                <div class="col-lg-3">
+
+                                    <h:selectOneMenu id="idAsesor" class="form-control col-xs-8"
+                                                     value="#{controladorMonitoreo.monitoreo.idAsesor}">
+                                        <f:selectItems value="#{controladorUsuario.all}" var="tipo" itemLabel="#{tipo.nombre1}" ></f:selectItems>
+
+                                    </h:selectOneMenu>
+
+                                </div>
+                               
+                            </div>
+                           
+                            <div class="form-group">
+                                <div class="col-sm-12">
+
+                                    <div class="col-md-1 bloque">
+                                        <p>Fecha</p>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" id="mydate" name="mydate" required="true" jsf:value="#{controladorMonitoreo.monitoreo.fechaMonitoreo}"/>
+                                    </div>
+
+                                    <div class="col-md-1 bloque">
+                                        <p>Nota</p>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" id="nota" name="nota" required="true" jsf:value="#{controladorMonitoreo.monitoreo.calificacionMonitoreo}"/>
+                                    </div>
+
+                                    <div class="col-md-1 bloque">
+                                        <p>Transcripción</p>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" id="transcripcion" name="transcripcion" required="true" jsf:value="#{controladorMonitoreo.monitoreo.transcripcion}"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="col-md-12-tabla">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <label class="col-sm-8-control-label" for="nombre">Atributo</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="col-sm-8-control-label" for="nombre">Empatía y Cordialidad</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-1-control-label" for="nombre">Tipo Atributo</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-1-control-label" for="nombre">Evaluación</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>1</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Uso correcto quick test (Bienvenida, Duración de Chat, Agradecimiento, Disculpas, Solicitudes, Escalamientos, Recomendaciones, Motivación, Despedida.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" >Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>2</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Se apropia de la situación del estudiante dando claridad de su causa, mostrando disposición para solventarla de manera conjunta.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="red"><b>Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>3</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Evita en su discurso comentarios irónicos, vocabulario inadecuado y/o sobre pasar la confianza del estudiante.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="red"><b>Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12-tabla">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <label class="col-sm-8-control-label" for="nombre">Atributo</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="col-sm-8-control-label" for="nombre">Información e Integración</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Tipo Atributo</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Evaluación</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>4</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Comprende requerimiento del estudiante, realiza sondeo de ser necesario, identificando la necesidad del estudiante.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>5</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Asegura cierre de la gestión con el uso del quick test correcto.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="red"><b>Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>6</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Evita re procesos realizando envío de quick test correcto y oportuno en la misma gestión (5 seg de corrección).</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12-tabla">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <label class="col-sm-8-control-label" for="nombre">Atributo</label>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <label class="col-sm-8-control-label" for="nombre">Netiketa</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Tipo Atributo</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Evaluación</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>7</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Manejo del discurso evitando argumentos que no tienen relación con el objetivo del chat. (Repetición y/o uso de muletillas)</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>8</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Envía comunicaciones haciendo uso correcto de los acentos y signos de puntuación.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>9</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Uso de mayúsculas al inicio de cada oración, uso de iconos moderado</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>10</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Las comunicaciones hacia los estudiantes contienen información clara, con base en la correcta construcción de palabras y oraciones.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="#00FF40"><b>No Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>11</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Se realiza el cierre de Chat de acuerdo a los tiempos y situaciones definidos</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="red"><b>Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12-tabla">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <label class="col-sm-8-control-label" for="nombre">Atributo</label>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <label class="col-sm-8-control-label" for="nombre">Herramientas</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Tipo Atributo</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="col-sm-2-control-label" for="nombre">Evaluación</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <p>12</p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <p>Crea caso y lo asigna al propietario correspondiente, de acuerdo a la situación que requiere el estudiante y los proceso establecidos.</p>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <font color="red"><b>Critico</b></font>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <select required="true" name="calificacion" id="calificacion" for="calificacion">
+                                                <option value="" pi:disabled="true"  pi:selected="true">Seleccione</option>
+                                                <option value="1">Cumple</option>
+                                                <option value="2">No cumple</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12-tabla">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <label class="col-sm-12-control-label" for="nombre">Recomendaciones</label>
+                                        </div>  
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+
+                                        <textarea class="form-control" id="inputdefault" type="text" jsf:value="#{controladorMonitoreo.monitoreo.transcripcion}"></textarea> 
+
+                                    </div>
+                                </div>
+                                <div><br/></div>
+                            </div>
+                        </div>
+                    </h:form>
+
+                </div>
+                <div class="form-group1">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary" name="registrar" value="registrar">Calificar Monitoreo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div> 
+                <ul>
+                    <li>Copyright © 2016 ISQM LLC. Todos los derechos reservados. El nombre y el logo de ISQM son marcas registradas.</li>
+                </ul>
+            </div>
+        </footer>
+    </h:body>
+</html>

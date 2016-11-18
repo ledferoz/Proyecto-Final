@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>ISQM</title>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-table.min.css"></link>
+        <script src="resources/js/jquery-1.12.0.min.js"></script>
+        <script src="resources/js/bootstrap-table.min.js"></script>
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <div class="row">
+                <h:form id="defaultForm"  class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="inputNombre" class="control-label col-xs-2">Nombre Plantilla:</label>
+                        <input type="name" class="form-control" placeholder="Nombre Plantilla" jsf:value="#{controladorPlantilla.plantilla.nombrePlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="input" claechass="control-label col-xs-2">Fecha Plantilla:</label>
+                        <input type="text" class="form-control" placeholder="2016-03-12" jsf:value="#{controladorPlantilla.plantilla.fechaCreacionPlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="inputValor" class="control-label col-xs-2">Valor:</label>
+                        <input type="text" class="form-control" placeholder="Valor" jsf:value="#{controladorPlantilla.plantilla.valorPlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <h:commandButton type="submit" class="btn btn-primary" value="Registrar" action="#{controladorPlantilla.registar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                
+                    <h:form>
+                <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+			<thead>
+				<tr>
+					
+					<th data-halign="center" data-align="center" data-sortable="true" >Nombre Plantilla</th>
+					<th data-halign="center" data-align="center" >Fecha de Creacion</th>
+					<th data-halign="center" data-align="center" >Valor</th>                                          
+					<th data-halign="center" data-align="center" >Edital Eliminar</th>                                          
+				</tr>
+			</thead> 
+	  
+			<tbody>
+                            <c:forEach items="#{controladorPlantilla.all}" var="p">
+                                
+				<tr>
+                                    <td>#{p.nombrePlantilla}</td>	
+                                    <td>#{p.fechaCreacionPlantilla}</td>	
+                                    <td>#{p.valorPlantilla}</td>	
+                                    <td>
+                                    <h:commandLink onclick="modalEliminar()">
+                                        <h:graphicImage value="img/delete.png"  height="32px" width="32px" />
+                                        
+                                        <f:ajax render="fomVentanas:misValoresEliminar"
+                                                listener="#{controladorPlantilla.setPlantilla(p)}">
+                                        </f:ajax>
+                                    </h:commandLink> 
+                                    <h:commandLink onclick="modalEditar()">
+                                        <h:graphicImage value="img/edit.png"   height="32px" width="32px" />
+                                        <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+                                        
+                                        <f:ajax render="fomVentanas:editar defaultForm"
+                                                listener="#{controladorPlantilla.setPlantilla(p)}">
+                                        </f:ajax>
+                                    </h:commandLink></td>	
+					                                      
+				</tr>
+				
+                            </c:forEach>
+			</tbody>
+		</table>
+                   
+                </h:form>
+                <h:form id="fomVentanas">
+            <div class="modal fade" tabindex="-1" role="dialog"
+                             id="myModalEliminar">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title">Desea Eliminar La Plantilla?</h4>
+                                    </div>
+
+                                    <h:panelGroup id="misValoresEliminar" class="modal-body">
+                                        Nombre:#{controladorPlantilla.plantilla.nombrePlantilla} <br />
+                                        Fecha:#{controladorPlantilla.plantilla.fechaCreacionPlantilla}  <br />
+                                        Valor:#{controladorPlantilla.plantilla.valorPlantilla}
+                                    </h:panelGroup>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Salir</button>
+                                        <h:commandButton class="btn btn-primary"
+                                                         action="#{controladorPlantilla.eliminar()}"
+                                                         value="Eliminar">
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+         <div class="modal fade" id="modalEditar" tabindex="-1"
+                        role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Modificar Plantilla</h4>
+                                </div>
+                                <h:panelGroup id="editar" styleClass="modal-mody">
+                                    <label>Nombre Plantilla</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorPlantilla.plantilla.nombrePlantilla}">
+                                    </h:inputText>
+                                    <label>Fecha Creacion Plantilla</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorPlantilla.plantilla.fechaCreacionPlantilla}"></h:inputText>
+                                    <label>Valor</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorPlantilla.plantilla.valorPlantilla}">
+                                    </h:inputText>
+                                  
+                                 
+                                </h:panelGroup>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">Salir</button>
+                                    <h:commandButton class="btn btn-primary"
+                                                     action="#{controladorPlantilla.modificar()}" value="Guardar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </h:form>
+            </div>          
+        </div>          
+
+      <script>
+		function modalEliminar() {
+			$('#myModalEliminar').modal('show');
+		}
+		function modalEditar() {
+			$('#modalEditar').modal('show');
+		}
+	</script>
+        <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="resources/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
+

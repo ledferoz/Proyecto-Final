@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>ISQM</title>
+        <link href="resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resource/css/formValidation.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/estiloSistema.css"/>
+            <link href="resource/css/sweetalert.css" rel="stylesheet" type="text/css"/>
+            <script src="resource/js/jquery-1.12.1.min.js" type="text/javascript"></script>
+            <script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="resource/js/formValidation.min.js" type="text/javascript"></script>
+            <script src="resource/js/bootstrap.js" type="text/javascript"></script>
+            <script src="resource/js/sweetalert.min.js" type="text/javascript"></script>
+            <script src="resource/js/es_ES.js" type="text/javascript"></script>
+            <style>
+                header{
+                    width: auto;
+                    color: white;
+                    min-height: 100px;
+                    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");  
+                    background-color: #0084FD;
+                }
+
+                body{
+                    background-image: url("resource/img/SistemaWeb.jpg");
+                    color:gray;
+                }
+
+                .btn-primary span{
+                    color: white;
+                }
+
+                footer{
+                    width: 90%;
+                    margin: auto;
+                    border-top: 5px double #3669a3;
+                    padding: 10px;
+                    margin-top: 100px;
+                    text-align: center;
+                    color:white;
+                }
+
+                footer ul{
+                    list-style:none;
+                    color:gray;
+
+                }
+
+                .form-group button{
+                    display: block;
+                    color: blue;
+                }
+            </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <div class="row">
+                <h:form id="form_registrar_usuario"  class="form-horizontal" >
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                             <label class="col-sm-3 control-label" for="mds">Id monitoreo</label>
+                        <h:selectOneMenu  class="form-control col-xs-4"
+                                         value="#{controladorFeedbacks.feedbacks.idMonitoreos}">
+                            <f:selectItems value="#{controladorMonitoreo.itemsAvailableSelectOne}" ></f:selectItems>
+
+                        </h:selectOneMenu>
+                    </div>
+ </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="mydate">Fecha Feedback:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="mydate" name="mydate"  jsf:value="#{controladorFeedbacks.feedbacks.fechaFeedback}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="recomendaciones">Recomendaciones:</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="inputdefault" type="text" jsf:value="#{controladorFeedbacks.feedbacks.recomendacion}"></textarea> 
+                        </div>
+                    </div>
+
+                    <div class="form-group1">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <h:commandButton type="submit" class="btn btn-primary" value="Agendar Feedback" action="#{controladorFeedbacks.registrar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <h:form>
+                    <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+                        <thead>
+                            <tr>
+
+                                <th data-halign="center" data-align="center" data-sortable="true" >Fecha </th>
+                                <th data-halign="center" data-align="center" >Recomendacion</th>                                        
+                                <th data-halign="center" data-align="center" >Edital Eliminar</th>                                          
+                            </tr>
+                        </thead> 
+
+                        <tbody>
+                            <c:forEach items="#{controladorFeedbacks.all}" var="f">
+
+                                <tr>
+                                    <td>#{f.fechaFeedback}</td>	
+                                    <td>#{f.recomendacion}</td>	
+                                    <td>
+                                        <h:commandLink onclick="modalEliminar()">
+                                            <h:graphicImage value="img/delete.png"  height="32px" width="32px" />
+
+                                            <f:ajax render="fomVentanas:misValoresEliminar"
+                                                    listener="#{controladorFeedbacks.setFeedbacks(f)}">
+                                            </f:ajax>
+                                        </h:commandLink> 
+                                        <h:commandLink onclick="modalEditar()">
+                                            <h:graphicImage value="img/edit.png"   height="32px" width="32px" />
+                                            <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+
+                                            <f:ajax render="fomVentanas:editar defaultForm"
+                                                    listener="#{controladorFeedbacks.setFeedbacks(f)}">
+                                            </f:ajax>
+                                        </h:commandLink></td>	
+
+                                </tr>
+
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </h:form>
+                <h:form id="fomVentanas">
+                    <div class="modal fade" tabindex="-1" role="dialog"
+                         id="myModalEliminar">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Desea Eliminar La Plantilla?</h4>
+                                </div>
+
+                                <h:panelGroup id="misValoresEliminar" class="modal-body">
+                                    Fecha:#{controladorFeedbacks.feedbacks.fechaFeedback}  <br />
+                                    Valor:#{controladorFeedbacks.feedbacks.recomendacion}
+                                </h:panelGroup>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Salir</button>
+                                    <h:commandButton class="btn btn-primary"
+                                                     action="#{controladorFeedbacks.eliminar()}"
+                                                     value="Eliminar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <div class="modal fade" id="modalEditar" tabindex="-1"
+                         role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Modificar Plantilla</h4>
+                                </div>
+                                <h:panelGroup id="editar" styleClass="modal-mody">
+                                    <label>Fecha</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorFeedbacks.feedbacks.fechaFeedback}"></h:inputText>
+                                    <label>Recomendacion</label>
+                                    <h:inputText class="form-control"
+                                                 value="#{controladorFeedbacks.feedbacks.recomendacion}">
+                                    </h:inputText>
+
+
+                                </h:panelGroup>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Salir</button>
+                                    <h:commandButton class="btn btn-primary"
+                                                     action="#{controladorFeedbacks.modificar()}" value="Guardar">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>          
+        </div>          
+
+        <script>
+            function modalEliminar() {
+                $('#myModalEliminar').modal('show');
+            }
+            function modalEditar() {
+                $('#modalEditar').modal('show');
+            }
+        </script>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <script src="resource/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+             $().ready(function () {
+                 $('.btn-primary').click(function () {
+
+                     swal({
+                         type: "success",
+                         title: "¡Feedback Agendado Exitosamente!",
+                         text: "Agendar Feedback!",
+                         //showConfirmButton: false,
+                         allowOutsideClick: true
+
+                     });
+                 });//cierre click bnt warning
+
+                 $('#mydate').glDatePicker({
+                     selectableDOW: [1, 2, 3, 4, 5]
+                 });
+
+                 $('#form_registrar_usuario').formValidation({
+                     message: 'Este valor no es correcto',
+                     icon: {
+                         valid: 'glyphicon glyphicon-ok',
+                         invalid: 'glyphicon glyphicon-remove',
+                         validating: 'glyphicon glyphicon-refresh'
+                     },
+                     fields: {
+                         idFeedback: {
+                             row: '.col-sm-5',
+                             validators: {
+                                 notEmpty: {
+                                     message: 'El Id es obligatorio'
+                                 },
+                                 stringLength: {
+                                     min: 2,
+                                     max: 11,
+                                     message: 'El Id debe contener mínimo 2, máximo 11 caracteres'
+                                 },
+                                 regexp: {
+                                     regexp: /[0-9]/,
+                                     message: 'El Id debe contener solo números'
+                                 }
+                             }
+                         },
+                         idMonitoreo: {
+                             row: '.col-sm-5',
+                             validators: {
+                                 notEmpty: {
+                                     message: 'El Id es obligatorio'
+                                 },
+                                 stringLength: {
+                                     min: 2,
+                                     max: 11,
+                                     message: 'El Id debe contener mínimo 2, máximo 11 caracteres'
+                                 },
+                                 regexp: {
+                                     regexp: /[0-9]/,
+                                     message: 'El Id debe contener solo números'
+                                 }
+                             }
+                         },
+                         mydate: {
+                             row: '.col-sm-5',
+                             validators: {
+                                 notEmpty: {
+                                     message: 'Seleccione una fecha'
+                                 },
+                                 mydate: {
+                                     message: 'Selección Requerida'
+                                 }
+                             }
+                         },
+                         Recomendaciones: {
+                             row: '.col-sm-5',
+                             validators: {
+                                 notEmpty: {
+                                     message: 'Este campo no puede quedar vacio'
+                                 },
+                                 stringLength: {
+                                     min: 2,
+                                     max: 255,
+                                     message: 'El nombre debe contener entre 2 y 255 caracteres'
+                                 },
+                                 regexp: {
+                                     regexp: /^[_a-zA-Z0-9-]*@[e-p-]+(.[c-o-]+)*(.[c-o-]+)$/,
+                                     message: ''
+                                 }
+                             }
+                         },
+                     }
+                 });
+             });
+        </script>
+    </h:body>
+</html>
+

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+               Registro De Plantilla
+            </ui:define>
+              <div class="container">
+
+            <div class="row">
+            <ui:define name="content">
+
+                <h:form id="defaultForm"  class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="inputNombre" class="control-label col-xs-2">Nombre Plantilla:</label>
+                        <input type="name" class="form-control" placeholder="Nombre Plantilla" jsf:value="#{controladorPlantilla.plantilla.nombrePlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="input" claechass="control-label col-xs-2">Fecha Plantilla:</label>
+                        <input type="text" class="form-control" placeholder="2016-03-12" jsf:value="#{controladorPlantilla.plantilla.fechaCreacionPlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                        <label for="inputValor" class="control-label col-xs-2">Valor:</label>
+                        <input type="text" class="form-control" placeholder="Valor" jsf:value="#{controladorPlantilla.plantilla.valorPlantilla}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <h:commandButton type="submit" class="btn btn-primary" value="Registrar" action="#{controladorPlantilla.registar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+                    </div>
+                    </div>
+
+        </ui:composition>
+
+    </body>
+</html>

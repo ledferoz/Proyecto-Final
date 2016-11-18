@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+                Gestion de usuarios
+            </ui:define>
+            <div class="container">
+                <div class="row">    
+                    <ui:define name="content">
+                         <div class="col-md-8">
+                            <c:if test="#{controladorUsuario.estado == 3}" >
+                                <div class="col-md-8">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>¡Movificacion Exitosa!</strong> La modificacion se realizo correptamente .
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="#{controladorUsuario.estado == 4}" >
+                                <div class="col-md-8">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>¡Error!</strong> No se pudo realizar la modificacion .
+                                    </div>
+                                </div>
+                            </c:if>
+                            #{controladorUsuario.borrarEstado()}
+                            </div>
+                        <h:form>
+                            <h:commandButton  id="exportar" image="../../resources/imgs/descargar.png">
+
+                            </h:commandButton>
+                            
+                             <h:form id="exportForm">
+                        <h4>Reportes</h4>
+                        <h:commandButton image="../../resources/imgs/pdf.png" action="#{controladorReporteUsuario.exportarPDF()}" />
+                        <h:commandButton value="Exportar Excel" action="#{controladorReporteUsuario.exportarXLS()}" />
+                    </h:form>
+                            
+                           <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+                        <thead>
+                                <tr>
+                                    <th data-halign="center" data-align="center">Documento</th>
+                                    <th  data-halign="center" data-align="center">Primer Nombre</th>
+                                    <th  data-halign="center" data-align="center">Segundo Nombre</th>
+                                    <th  data-halign="center" data-align="center">Primer Apellido</th>
+                                    <th  data-halign="center" data-align="center">Segundo Apellido</th>
+                                    <th  data-halign="center" data-align="center">Contrasena</th>
+                                    <th  data-halign="center" data-align="center">Correo</th>
+                                    <th  data-halign="center" data-align="center">Editar</th>
+
+                                </tr>
+                        </thead>
+                               <tbody>
+                                <c:forEach items="#{controladorUsuario.all}" var="v">
+                                    <tr>
+                                        <td>#{v.documento}</td>
+                                        <td>#{v.nombre1}</td>
+                                        <td>#{v.nombre2}</td>
+                                        <td>#{v.apellido1}</td>
+                                        <td>#{v.apellido2}</td>
+                                        <td>#{v.contrasena}</td>
+                                        <td>#{v.correo}</td>
+                                        <td>
+
+                                            
+                                            <h:commandLink onclick="modalEditar()">
+                                                <h:graphicImage value="../../resources/imgs/editfee.png"   height="32px" width="32px" />
+                                                <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+
+                                                <f:ajax render="fomVentanas:editar defaultForm"
+                                                        listener="#{controladorUsuario.setUser(v)}">
+                                                </f:ajax>
+                                            </h:commandLink>
+                                            
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                               </tbody>
+
+                            </table>
+
+
+                            <!-- /.modal -->
+
+                        </h:form> 
+
+                        <h:form id="fomVentanas">
+                            <div class="modal fade" id="modalEditar" tabindex="-1"
+                                 role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Modificar Usuario</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <h:panelGroup id="editar" styleClass="modal-mody">
+                                            <label> Documento</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.documento}">
+                                            </h:inputText>
+                                            <label>Primer Nombre</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.nombre1}"></h:inputText>
+                                            <label>Segundo Nombre</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.nombre2}">
+                                            </h:inputText>
+                                            <label>Primer Apellido</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.apellido1}">
+                                            </h:inputText>
+                                            <label>Segundo Apellido</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.apellido2}">
+                                            </h:inputText>
+                                            <label>Correo</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.correo}">
+                                            </h:inputText>
+                                            <label>Contrasena</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorUsuario.user.contrasena}">
+                                            </h:inputText>
+                                        </h:panelGroup>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Salir</button>
+                                            <h:commandButton class="btn btn-primary"
+                                                             action="#{controladorUsuario.modificar()}" value="Guardar">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+             
+            </ui:define>
+   </div>
+
+            </div>
+        </ui:composition>
+
+    </body>
+</html>

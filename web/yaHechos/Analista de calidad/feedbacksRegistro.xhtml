@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+    <h:body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="TITLE">
+                TITLE
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container">
+
+                    <div class="row">
+                        <h:form id="form_nuevo_feedbacks"  class="form-horizontal" >
+                            <div class="form-group">
+
+                                <label class="col-sm-3 control-label" for="mds">Id monitoreo</label>
+                                <div class="col-lg-5">
+                                    <h:selectOneMenu  class="form-control col-xs-4"
+                                                      value="#{controladorFeedbacks.feedbacks.idMonitoreos}" >
+                                        <f:selectItems value="#{controladorMonitoreo.all}" var="m" itemLabel="#{m.idMonitoreos}"  ></f:selectItems>
+
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="fecha">Fecha Feedback:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="fecha" name="fecha"  placeholder="2016-08-16" jsf:value="#{controladorFeedbacks.feedbacks.fechaFeedback}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="recomendaciones">Recomendaciones:</label>
+                                <div class="col-sm-5"> 
+                                    <textarea class="form-control" id="recomendaciones" type="text" jsf:value="#{controladorFeedbacks.feedbacks.recomendacion}"></textarea> 
+                                </div>
+                            </div>
+
+                            <div class="form-group1">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <h:commandButton type="submit" class="btn btn-primary" value="Agendar Feedback" action="#{controladorFeedbacks.registrar()}"></h:commandButton>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            $().ready(function(){
+            $('#form_nuevo_feedbacks').formValidation({
+            message: 'Este valor no es correcto',
+                    icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                            invalid: 'glyphicon glyphicon-remove',
+                            validating: 'glyphicon glyphicon-refresh'
+                            },
+                    fields: {
+                            idMonitoreo: {
+                            row: '.col-sm-5',
+                                    validators: {
+                                    notEmpty: {
+                                    message: 'El Id es obligatorio'
+                                    },
+                                            stringLength: {
+                                            min: 2,
+                                                    max: 11,
+                                                    message: 'El Id debe contener mínimo 2, máximo 11 caracteres'
+                                            },
+                                            regexp: {
+                                            regexp: /[0-9]/,
+                                                    message: 'El Id debe contener solo números'
+                                            }
+                                    }
+                            },
+                            fecha: {
+                            row: '.col-sm-5',
+                                    validators: {
+                                    notEmpty: {
+                                    message: 'Seleccione una fecha valida'
+                                    },
+                                            stringLength: {
+                                            min: 10
+                                                    max: 10
+                                                    message: 'El formato de fecha debe ser anio-mes-dia'
+                                            },
+                                            regexp: {
+                                            regexp: /[0-9-]/,
+                                                    message: ''
+                                            }
+                                    }
+                            },
+                            Recomendaciones: {
+                            row: '.col-sm-5',
+                                    validators: {
+                                    notEmpty: {
+                                    message: 'Este campo no puede quedar vacio'
+                                    },
+                                            stringLength: {
+                                            min: 2,
+                                                    max: 255,
+                                                    message: 'El nombre debe contener entre 2 y 255 caracteres'
+                                            },
+                                            regexp: {
+                                            regexp: /^[_a-zA-Z0-9-]*@[e-p-]+(.[c-o-]+)*(.[c-o-]+)$/,
+                                                    message: ''
+                                            }
+                                    }
+                            },
+                            }
+            });
+            });
+        </script>
+
+    </h:body>
+</html>

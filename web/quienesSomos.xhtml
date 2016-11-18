@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/template/home.xhtml">
+
+            <ui:define name="TITLE">
+                TITLE
+            </ui:define>
+
+            <ui:define name="content">
+                <section>
+                <div class="row"> <!-- esto me genera un espacio-->
+                    <div class="col-md-7 caja"> 
+                        <h1 >Quiénes somos? </h1>
+                        <p class="resaltado"><span class="glyphicon glyphicon-cog"></span> ISQM Information System Quality Monitoring </p>
+                        <p> Es un sistema de información el cual mejorara el proceso de monitoreo de chat de servicio de <strong> Open English</strong> este se apoyará en las muestras obtenidas de las conversaciones entre el asesor de chat y el estudiante. Con el consolidado de estas muestras el SI escalara esta información al Gerente de operaciones para que este parametrize nuevos atributos de calidad y retroalimente procesos, para que mejore la calidad de la información que se brinda a los estudiantes.</p>
+                    </div>
+                    <div class="col-md-5 caja">
+                     <img class="img-responsive" src="resources/imgs/equipo.jpg" height="260" width="100%"/>
+                    </div>
+                </div>
+            </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

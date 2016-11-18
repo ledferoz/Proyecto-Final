@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/template/home.xhtml">
+
+            <ui:define name="TITLE">
+               Contactenos
+            </ui:define>
+
+            <ui:define name="content">
+             <section>
+
+                <div class="row"> <!-- esto me genera un espacio-->
+                    <div class="col-md-7 caja"> 
+
+                        <h:form class="form-horizontal">
+                            <fieldset>
+
+                                <!-- Form Name -->
+                                <legend id="contact" >Contactenos </legend>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinputName">Nombre</label>  
+                                    <div class="col-md-4">
+                                        <input id="textinputName" name="textinputName" type="text" placeholder="Ejemplo: Juan Diego" class="form-control input-md" jsf:value="#{controladorEmail.nombres}"/>
+
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinputApellido">Apellidos</label>  
+                                    <div class="col-md-4">
+                                        <input id="textinputApellido" name="textinputApellido" type="text" placeholder="Ejemplo: Granados Rojas" class="form-control input-md" jsf:value="#{controladorEmail.apellidos}"/>
+
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinputCorreoElectronico">Correo Electrónico</label>  
+                                    <div class="col-md-4">
+                                        <input id="textinputCorreoElectronico" name="textinputCorreoElectronico" type="text" placeholder="Ejemplo: juandi@gmail.com" class="form-control input-md" jsf:value="#{controladorEmail.correo}"/>
+
+                                    </div>
+                                </div>
+
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textComentario">Comentario</label>
+                                    <div class="col-md-4">                     
+                                        <h:inputTextarea class="form-control" id="textComentario"  value="#{controladorEmail.contenido}">Escriba aquí su mensaje</h:inputTextarea>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                                    <div class="col-md-4">
+                                        <h:commandButton id="singlebutton" class="btn btn-inverse" action="#{controladorEmail.enviarMensaje()}" value="Enviar"></h:commandButton>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </h:form>
+
+                    </div>
+
+                    <div class="col-md-5 cajaMapa">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15905.129054713936!2d-74.04723614999999!3d4.720956649999999!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sco!4v1447783266195" width="445" height="265" frameborder="0" style="border:0" allowfullscreen=""></iframe> 
+                    </div>
+                </div>
+            </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

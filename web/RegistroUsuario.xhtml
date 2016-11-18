@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+                <title>Registro Usuario</title>
+                <link href="./resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+                <link href="./resources/css/formValidation.min.css" rel="stylesheet" type="text/css"/>
+                <link rel="stylesheet" type="text/css" href="./resources/css/estiloSistema.css"/>
+                    <link rel="stylesheet" href="./resources/css/bootstrap-table.min.css"/>
+                        <!--<link href="./resources/css/sweetalert.css" rel="stylesheet" type="text/css"/>-->
+
+                        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+                        <script src="resources/js/jquery-1.12.0.min.js" type="text/javascript"></script>
+                        <!--<script src="./resources/js/bootstrap-table.min.js"></script>-->
+                        <!--<script src="./resources/js/bootstrap-table-es-ES.min.js"></script>-->
+                        <!--<script src="./resources/js/bootstrap.min.js" type="text/javascript"></script>-->
+                        <script src="resources/js/formValidation.min.js" type="text/javascript"></script>
+                        <!--<script src="./resources/js/sweetalert.min.js" type="text/javascript"></script>-->
+                     
+                        <style type="text/css">
+
+                            header{
+                                width: auto;
+                                color: white;
+                                min-height: 100px;
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");  
+                                background-color: #0084FD;
+                            }
+                            body{
+                                background-image: url("imgs/SistemaWeb.jpg");
+                                color:gray;
+                            }
+                            .fileUpload {
+                                position: relative;
+                                overflow: hidden;
+                                margin: 10px;
+                            }
+                            .fileUpload input.upload {
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 0;
+                                padding: 0;
+                                font-size: 20px;
+                                cursor: pointer;
+                                opacity: 0;
+                                filter: alpha(opacity=0);
+                            }
+                            .table-striped{
+                                background-color: white;
+                            }
+                            .btn-primary span{
+                                color: white;
+                            } 
+
+                            footer{
+                                width: 90%;
+                                margin: auto;
+                                border-top: 5px double #3669a3;
+                                padding: 10px;
+                                margin-top: 100px;
+                                text-align: center;
+                                color:white;
+                            }
+
+                            footer ul{
+                                list-style:none;
+                                color:gray;
+
+                            }
+                        </style>
+
+                        </h:head>
+                            <h:body>
+
+                                <div class="container"> 
+                                    <header> <img src="./imgs/LogoHorizontalBlanco2.png" height="100" width="400"/> Registro Usuario </header>
+                                    <nav class="navbar navbar-default navbar-static-top">
+                                        <div class="container-fluid">
+                                            <!-- Brand and toggle get grouped for better mobile display -->
+                                            <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" />
+                                            </div>
+                                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                <ul class="nav navbar-nav">
+                                                    <li><a href="SistemaInicio.html">Sistema</a></li>
+                                                </ul>
+                                            </div><!-- /.navbar-collapse -->
+                                        </div><!-- /.container-fluid -->
+                                    </nav>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <div class="page-header">
+                                                <h2>Registro Usuario</h2>
+                                            </div>
+
+                                            <noscript>
+                                                <p class="text-danger">
+                                                    Debe habilitar el JavaScript en su navegador!!!
+                                                </p>
+                                            </noscript>
+
+                                            <h:form id="formulario_de_registro" pi:method="post" class="form-horizontal"  >
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-lg-3 control-label">Tipo de Documento</h:outputLabel>
+                                                    <div class="col-lg-5">
+
+                                                        <h:selectOneMenu id="tipoDocumento" class="form-control col-xs-8"
+                                                                         value="#{controladorUsuario.user.idTipoDocumento}">
+                                                            <f:selectItems value="#{controladorTipoDocumento.all}" var="tipo" itemLabel="#{tipo.nombreDocumento}" ></f:selectItems>
+
+                                                        </h:selectOneMenu>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-lg-3 control-label">Numero de Documento</h:outputLabel>
+                                                    <div class="col-lg-5">
+                                                        <h:inputText  class="form-control" id="phoneNumber" style="border-radius:5px;" required="true" value="#{controladorUsuario.user.documento}" />
+                                                    </div>
+                                                </div>  
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-lg-3 control-label">Nombres:</h:outputLabel>
+                                                    <div class="col-lg-4 validacion" >
+                                                        <h:inputText  class="form-control" id="nombres" maxlength="28" required="true" pi:placeholder="Primer Noaceholdembre"  style="border-radius:5px;" value="#{controladorUsuario.user.nombre1}"/>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <h:inputText  required="required" class="form-control" pi:placeholder="Segundo Nombre"  style="border-radius:5px;" value="#{controladorUsuario.user.nombre2}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-lg-3 control-label">Apellidos:</h:outputLabel>
+                                                    <div class="col-lg-4 validacion">
+                                                        <h:inputText  class="form-control" id="apellidos" maxlength="28"  pi:placeholder="Primer Apellido" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.apellido1}"/>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <h:inputText  class="form-control" id="secondsurName" pi:placeholder="Segundo Apellido" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.apellido2}"/>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-lg-3 control-label">Correo Electronico:</h:outputLabel>
+                                                    <div class="col-lg-5 validacion">
+                                                        <h:inputText  class="form-control" id="email" maxlength="96" required="true" style="border-radius:5px;"  pi:placeholder="ejempo@mail.com" value="#{controladorUsuario.user.correo}"/>
+                                                    </div>
+                                                </div>
+
+
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <h:outputLabel class="col-lg-3 control-label">Ingrese su contraseña</h:outputLabel>
+                                                        <div class="col-lg-5 validacion" >
+                                                            <h:inputSecret  class="form-control" id="password" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.contrasena}"/>
+                                                        </div>
+                                                    </div>
+
+
+                                                </fieldset>
+
+                                                <div class="form-group hide">
+                                                    <div class="col-lg-9 col-lg-offset-3">
+                                                        <ul id="errors"></ul>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-9 col-lg-offset-3">
+                                                        <h:commandButton type="submit" class="btn btn-primary" style="background-color: #50B2A8;" value="Registro" action="#{controladorUsuario.registar()}" ></h:commandButton>
+                                                    </div>
+                                                </div>  
+
+                                            </h:form>
+
+                                        </div>  
+                                    </div>  
+                                </div>  
+
+
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#formulario_de_registro').formValidation({
+                                            message: 'Este valor no es válido',
+                                            icon: {
+                                                valid: 'glyphicon glyphicon-ok',
+                                                invalid: 'glyphicon glyphicon-remove',
+                                                validating: 'glyphicon glyphicon-refresh'
+                                            },
+                                            fields: {
+                                                'formulario_de_registro:rol': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'Por favor seleccione un rol'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:nombres': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Nombre\' es requerido'
+                                                        },
+                                                        stringLength: {
+                                                            min: 3,
+                                                            message: 'El Nombre debe tener al menos 3 letras'
+                                                        },
+                                                        regexp: {
+                                                            regexp: /^([a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{3,12}[ ]*){1}([a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{1,12}[ ]+){0,6}[a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{0,12}[ ]*$/,
+                                                            message: 'Ingrese un nombre válido (Sólo se reconocen las letras del español)'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:apellidos': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Apellido\' es requerido'
+                                                        },
+                                                        stringLength: {
+                                                            min: 3,
+                                                            message: 'El Apellido debe tener al menos 3 letras'
+                                                        },
+                                                        regexp: {
+                                                            regexp: /^([a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{3,12}[ ]*){1}([a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{1,12}[ ]+){0,6}[a-zA-ZáéíóúñÁÉÍÓÚÑäëïöüÄËÏÖÜ]{0,12}[ ]*$/,
+                                                            message: 'Ingrese un apellido válido (Sólo se reconocen las letras del español)'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:email': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Correo electrónico\' es requerido'
+                                                        },
+                                                        regexp: {
+                                                            regexp: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/,
+                                                            message: 'Ingrese un correo electrónico válido (Ejemplo: correo.usuario_1@ejemplomail.com)'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:clave': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Contraseña\' es requerido'
+                                                        },
+                                                        stringLength: {
+                                                            min: 6,
+                                                            message: 'La contraseña debe tener por lo menos 6 caracteres'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:confirmarClave': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Confirmar contraseña\' es requerido'
+                                                        },
+                                                        identical: {
+                                                            field: 'formulario_de_registro:clave',
+                                                            message: 'Las contraseñas no son iguales, por favor verifique'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:sexo': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'Por favor seleccione su sexo'
+                                                        }
+                                                    }
+                                                },
+                                                'formulario_de_registro:fechaNacimiento_input': {
+                                                    row: '.validacion',
+                                                    validators: {
+                                                        notEmpty: {
+                                                            message: 'El campo \'Fecha de Nacimiento\' es requerido'
+                                                        },
+                                                        regexp: {
+                                                            regexp: /^([0][1-9]|[12][0-9]|3[01])(\/)([0][1-9]|[1][0-2])(\/)(19|20)\d{2}$/,
+                                                            message: 'Por favor ingrese su fecha de nacimiento en formato dd/mm/aaaa'
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </h:body>
+                            </html>

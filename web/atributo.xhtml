@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+        <label>Nombre Atributo</label>
+        <input jsf:value="#{controladorAtributo.atributo.nombreAtributo}"></input>
+        
+        <label>valor del atributo</label>
+        <input jsf:value="#{controladorAtributo.atributo.valorAtributo}"></input>
+       <div class="col-sm-9 col-sm-offset-3">
+                             <label class="col-sm-3 control-label" for="mds">Id monitoreo</label>
+                        <h:selectOneMenu  class="form-control col-xs-4"
+                                          value="#{controladorAtributo.atributo.idTipoAtributo}">
+                            <f:selectItems value="#{controladorTipoAtributo.itemsAvailableSelectOne}" var="tipo" itemLabel="#{tipo.description}"></f:selectItems>
+
+                        </h:selectOneMenu>
+                    </div>
+        <div class="col-sm-9 col-sm-offset-3">
+                             <label class="col-sm-3 control-label" for="mds">Id monitoreo</label>
+                        <h:selectOneMenu  class="form-control col-xs-4"
+                                          value="#{controladorAtributo.atributo.idCategorias}">
+                            <f:selectItems value="#{controladorCategoria.itemsAvailableSelectOne}" var="categoria"  itemLabel="#{categoria.description}"></f:selectItems>
+
+                        </h:selectOneMenu>
+                    </div>
+        
+        <h:commandButton value="Registar" action="#{controladorAtributo.registrar()}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAtributos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f66b38a-93d1-445c-8bd9-e33423006bee">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="9be222ff-b0fa-4b25-b86f-3f2d17e8b394"/>
+	<field name="idAtributos" class="java.lang.Integer"/>
+	<field name="nombreAtributo" class="java.lang.String"/>
+	<field name="valorAtributo" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="267" y="32" width="274" height="38" forecolor="#3333FF" uuid="d771a0b6-8042-4832-be31-475d1474788f"/>
+				<box>
+					<pen lineColor="#3333FF"/>
+					<topPen lineColor="#3333FF"/>
+					<leftPen lineColor="#3333FF"/>
+					<bottomPen lineColor="#3333FF"/>
+					<rightPen lineColor="#3333FF"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="16" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Listado actual de atributos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="38" y="7" width="193" height="72" uuid="38e23637-ca20-4262-bf6e-327fb98c00eb"/>
+				<imageExpression><![CDATA["C:\\Users\\Ferchito\\Documents\\NetBeansProjects\\IsqmProject-master\\web\\reportes\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement x="10" y="12" width="524" height="1" forecolor="#0033FF" uuid="47ce1f5e-ee2b-47b6-94a5-4a1d746c8c21"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="2" width="100" height="20" uuid="0bde3e48-5403-4376-9146-d14fc17ac7b3"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="2" width="100" height="20" uuid="b9064611-19dd-479a-81cd-29cd96db2046"/>
+				<text><![CDATA[Enunciado	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="2" width="100" height="20" uuid="6fdc2263-d933-49c8-aa62-69f3b0c3b11d"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="18" width="100" height="20" uuid="748b3c6f-dbc0-4752-82ea-802541e12a1a"/>
+				<textFieldExpression><![CDATA[$F{idAtributos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="18" width="100" height="20" uuid="ac50536f-b693-485a-81dd-8278edd2eb8e"/>
+				<textFieldExpression><![CDATA[$F{nombreAtributo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="19" width="100" height="20" uuid="f9dfcdf2-a574-4e8a-9e7d-42976f15c68a"/>
+				<textFieldExpression><![CDATA[$F{valorAtributo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="36" width="551" height="20" uuid="5338b5a0-a66f-4dfb-8d14-2d9b70e317ea"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Copyright © 2015 ISQM LLC. Todos los derechos reservados. El nombre y el logo de ISQM son marcas registradas.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="32" width="524" height="1" forecolor="#0033FF" uuid="b767c092-97b6-4047-b140-4bb421b5bcc5"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

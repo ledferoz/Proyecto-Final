@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:pi="http://java.sun.com/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/template/home.xhtml">
+
+            <ui:define name="TITLE">
+                Bienvenido a ISQM
+            </ui:define>
+
+            <ui:define name="content">
+                <section>
+                    <div class="row"> <!-- esto me genera un espacio-->
+                        <div class="col-md-7 caja">
+                            <img src="./resources/imgs/ImgBloque1.jpg"  class="img-responsive" alt="imgBloque" height="258" width="100%"/>
+                        </div>
+                        <div class="col-md-5 caja">
+                            <div class="middle-Page">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Log In</h3>
+
+                                    </div>
+                                    <div>
+                                        <br/>
+                                        <section>
+                                            <div class="col-md-12">
+                                                <c:if test="#{loginControlador.estado == 1}" >
+                                                    <div class="col-md-8">
+                                                        <div class="alert alert-info alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                            <strong>El usuario o la clave no conciden intentelo de nuevo</strong>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                                #{loginControlador.borrarEstado()}
+                                            </div>
+                                            <div class="row"> <!-- esto me genera un espacio-->
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <h:form id="forma" class="form-horizontal" >
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="usuario">Usuario</label>
+                                                            <div class="col-sm-8">
+                                                                <h:inputText class="form-control" id="usuario" value="#{loginControlador.documento}"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="clave">Clave</label>
+                                                            <div class="col-sm-8">
+                                                                <h:inputSecret  class="form-control"  id="clave" required="true" value="#{loginControlador.password}"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group1">
+                                                            <div class="col-sm-9 col-sm-offset-3">
+                                                                <h:commandButton type="submit" class="btn btn-primary"  value="Ingresar" action="#{loginControlador.iniciarSession()}"/>
+                                                                <br/>
+                                                                <a href="faces/recordarPassword.xhtml" class="btn btn-link pull-right">Recordar su contraseña?</a>
+                                                              
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

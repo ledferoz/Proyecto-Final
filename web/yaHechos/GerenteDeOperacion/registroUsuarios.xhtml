@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pi="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+            <ui:define name="title">
+                Registro Usuarios 
+            </ui:define>
+            <div class="container">
+
+                <div class="row">
+                    <!-- form: -->
+
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="page-header">
+                            <h2 >Registrarse</h2>
+                        </div>  
+
+                        <ui:define name="content">
+                            <h:form id="defaultForm" pi:method="post" class="form-horizontal"  >
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Tipo de Documento</h:outputLabel>
+                                    <div class="col-lg-5">
+
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control col-xs-8"
+                                                         value="#{controladorUsuario.user.idTipoDocumento}">
+                                            <f:selectItems value="#{controladorTipoDocumento.all}" var="tipo" itemLabel="#{tipo.nombreDocumento}" ></f:selectItems>
+
+                                        </h:selectOneMenu>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Numero de Documento</h:outputLabel>
+                                    <div class="col-lg-5">
+                                        <h:inputText  class="form-control" id="phoneNumber" style="border-radius:5px;" required="true" value="#{controladorUsuario.user.documento}" />
+                                    </div>
+                                </div>  
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Nombres:</h:outputLabel>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="firstName" pi:placeholder="Primer Noaceholdembre" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.nombre1}"/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h:inputText  required="required" class="form-control" pi:placeholder="Segundo Nombre" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.nombre2}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Apellidos:</h:outputLabel>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="lastName" pi:placeholder="Primer Apellido" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.apellido1}"/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h:inputText  class="form-control" id="secondsurName" pi:placeholder="Segundo Apellido" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.apellido2}"/>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel class="col-lg-3 control-label">Correo Electronico:</h:outputLabel>
+                                    <div class="col-lg-5">
+                                        <h:inputText  class="form-control" id="email" style="border-radius:5px;" required="true" pi:placeholder="ejempo@mail.com" value="#{controladorUsuario.user.correo}"/>
+                                    </div>
+                                </div>
+
+
+                                <fieldset>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-lg-3 control-label">Ingrese su contraseña</h:outputLabel>
+                                        <div class="col-lg-5">
+                                            <h:inputSecret  class="form-control" id="password" required="true" style="border-radius:5px;" value="#{controladorUsuario.user.contrasena}"/>
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <h:commandButton type="submit" class="btn btn-primary" style="background-color: #50B2A8;" value="Registro" action="#{controladorUsuario.registar()}" ></h:commandButton>
+                                    </div>
+                                </div>  
+
+                            </h:form>
+                </ui:define>
+                                </div>  
+                    </div>  
+                </div>  
+
+        </ui:composition>
+
+    </body>
+</html>

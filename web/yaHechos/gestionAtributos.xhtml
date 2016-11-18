@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="title">
+             Gestion Atributo
+            </ui:define>
+            <div class="container">
+                <div class="row">    
+                    <ui:define name="content">
+                        <h:form>
+                            <h:commandButton  id="exportar" image="../../resources/imgs/descargar.png">
+
+                            </h:commandButton>
+                            <table class="table table-striped " data-toggle="table" data-height="400" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[4,8,12, All]">
+                                <thead>
+                                    <tr>
+                                        <th data-halign="center" data-align="center" >Nombre Atributo</th>
+                                        <th data-halign="center" data-align="center" >Valor Atributo</th>                                          
+                                        <th data-halign="center" data-align="center" >Edital Eliminar</th>                                          
+                                    </tr>
+                                </thead> 
+                                <tbody>
+                                    <c:forEach items="#{controladorAtributo.all}" var="a">
+                                        <tr>
+                                            <td>#{a.nombreAtributo}</td>
+                                            <td>#{a.valorAtributo}</td>
+
+                                            <td>
+
+                                                <h:commandLink onclick="modalEliminar()">
+                                                    <h:graphicImage value="../../resources/imgs/eliminar.png"  height="32px" width="32px" />
+
+                                                    <f:ajax render="fomVentanas:misValoresEliminar"
+                                                            listener="#{controladorAtributo.setAtributo(a)}">
+                                                    </f:ajax>
+                                                </h:commandLink> 
+                                                <h:commandLink onclick="modalEditar()">
+                                                    <h:graphicImage value="../../resources/imgs/editfee.png"   height="32px" width="32px" />
+                                                    <!--El render es el id que se le da h:panelGroup sirve para pasar los valores que se quieren enlistar-->
+
+                                                    <f:ajax render="fomVentanas:editar"
+                                                            listener="#{controladorAtributo.setAtributo(a)}">
+                                                    </f:ajax>
+                                                </h:commandLink>
+
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+
+                                </tbody>
+                            </table>
+
+
+                            <!-- /.modal -->
+
+                        </h:form> 
+
+                        <h:form id="fomVentanas">
+                            <div class="modal fade" tabindex="-1" role="dialog"
+                                 id="myModalEliminar">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title">Desea Eliminar El Atributo?</h4>
+                                        </div>
+
+                                        <h:panelGroup id="misValoresEliminar" class="modal-body">
+                                            Nombre Atributo:#{controladorAtributo.atributo.nombreAtributo} <br />
+                                            Valor Atributo:#{controladorAtributo.atributo.valorAtributo}
+                                        </h:panelGroup>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Salir</button>
+                                            <h:commandButton class="btn btn-primary"
+                                                             action="#{controladorAtributo.eliminar()}"
+                                                             value="Eliminar">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <div class="modal fade" id="modalEditar" tabindex="-1"
+                                 role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Modificar Atributo</h4>
+                                        </div>
+                                        <h:panelGroup id="editar" styleClass="modal-mody">
+                                            <label> Nombre Atributo</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorAtributo.atributo.nombreAtributo}">
+                                            </h:inputText>
+                                            <label>Valor Atributo</label>
+                                            <h:inputText class="form-control"
+                                                         value="#{controladorAtributo.atributo.valorAtributo}"></h:inputText>
+
+                                        </h:panelGroup>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Salir</button>
+                                            <h:commandButton class="btn btn-primary"
+                                                             action="#{controladorAtributo.modificar()}" value="Guardar">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+
+                    </ui:define>
+                </div>
+
+            </div>
+
+        </ui:composition>
+
+    </body>
+</html>
